@@ -9,8 +9,8 @@ console.log('Starting the twitter bot...');
 
 
 let params = {
-   screen_name: 'coaching_ptp',
-//    screen_name: 'WestReservoir',
+    screen_name: 'coaching_ptp',
+
 
     count : 2,
     exclude_replies : true,
@@ -38,7 +38,7 @@ let params = {
 function gotData(err, data, response){
 
     data.forEach(tweet => {
-            console.log(tweet);
+            console.log(tweet.full_text);
         }
     );
 
