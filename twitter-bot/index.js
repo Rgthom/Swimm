@@ -9,17 +9,37 @@ console.log('Starting the twitter bot...');
 
 
 let params = {
-    screen_name: 'Brockwell_Lido',
-    count : 50,
-    start_time: '2021-12-17T16:30:10.000Z'
+   screen_name: 'coaching_ptp',
+//    screen_name: 'WestReservoir',
+
+    count : 2,
+    exclude_replies : true,
+    include_rts: false,
+    tweet_mode: 'extended'
 };
 
 
-T.get('statuses/user_timeline', params, gotData);
+
+ // T.get('search/tweets', params, gotData);
+
+  T.get('statuses/user_timeline', params, gotData);
+
+
+/* function gotData(err, data, response){
+    var tweets = data.find(function(post) {
+        if(post.hasOwnProperty(`text`))
+            return true;
+    });
+    console.log(tweets.text); 
+}
+*/
 
 
 function gotData(err, data, response){
-    console.log(data);
-}
 
-console.log('end');
+    data.forEach(tweet => {
+            console.log(tweet);
+        }
+    );
+
+console.log('end')};
