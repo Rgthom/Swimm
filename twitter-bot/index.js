@@ -24,22 +24,16 @@ let params = {
 
   T.get('statuses/user_timeline', params, gotData);
 
-
-/* function gotData(err, data, response){
-    var tweets = data.find(function(post) {
-        if(post.hasOwnProperty(`text`))
-            return true;
-    });
-    console.log(tweets.text); 
-}
-*/
-
+const swimTweet = ['Example'];
 
 function gotData(err, data, response){
 
-    data.forEach(tweet => {
-            console.log(tweet.full_text);
+    data.forEach(tweet => { 
+        swimTweet.push(tweet.full_text);
         }
+        
     );
 
-console.log('end')};
+console.log(swimTweet[0])};
+
+console.log('This search has finished')
