@@ -1,6 +1,6 @@
 const Twit = require("twit");
 const config = require("./config");
-const params = require("./params");
+const pools = require("./pools");
 
 var T = new Twit(config);
 
@@ -10,22 +10,22 @@ const swimTweet = [];
 //T.get("statuses/user_timeline", params, gotData);
 
 function getTweets() {
-  T.get("statuses/user_timeline", params, function (err, data, response) {
+  T.get("statuses/user_timeline", pools, function (err, data, response) {
     data.forEach((tweet) => {
       swimTweet.push(tweet.full_text);
     });
+    console.log("this is here", swimTweet[0]);
   });
 }
 
-function getAllTweets() {
-  for (let i = 0; i < params.length; i++) {
-    getTweets(params[i]);
+async function getAllTweets() {
+  for (let i = 0; i < pools.length; i++) {
+    await getTweets(pools[i]);
     {
       console.log(swimTweet);
     }
   }
 }
-
 getAllTweets();
 /* function gotData(err, data, response) {
   data.forEach((tweet) => {

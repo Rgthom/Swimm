@@ -1,4 +1,4 @@
-module.exports = params = [
+module.exports = pools = [
   {
     screen_name: "SerpsSwimClub",
     count: 10,
@@ -20,7 +20,6 @@ module.exports = params = [
     include_rts: false,
     tweet_mode: "extended",
   }),
-
   (params = {
     screen_name: "coaching_ptp",
     count: 10,
@@ -28,7 +27,6 @@ module.exports = params = [
     include_rts: false,
     tweet_mode: "extended",
   }),
-
   (params = {
     screen_name: "CityCorpHeath",
     count: 10,
