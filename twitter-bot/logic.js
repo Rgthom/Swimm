@@ -6,9 +6,12 @@ var T = new Twit(config);
 
 console.log("Starting the twitter search...");
 
-T.get("statuses/user_timeline", params, gotData);
-
 const swimTweet = [];
+//T.get("statuses/user_timeline", params, gotData);
+
+T.get("statuses/user_timeline", params, function (err, data, response) {
+  console.log(data[0].full_text);
+});
 
 function gotData(err, data, response) {
   data.forEach((tweet) => {
@@ -19,5 +22,3 @@ function gotData(err, data, response) {
 }
 
 console.log("Closing the twitter search...");
-
-console.log("some testing");
