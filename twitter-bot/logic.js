@@ -14,11 +14,19 @@ function getTweets() {
     data.forEach((tweet) => {
       swimTweet.push(tweet.full_text);
     });
-    console.log(swimTweet);
   });
 }
-getTweets();
 
+function getAllTweets() {
+  for (let i = 0; i < params.length; i++) {
+    getTweets(params[i]);
+    {
+      console.log(swimTweet);
+    }
+  }
+}
+
+getAllTweets();
 /* function gotData(err, data, response) {
   data.forEach((tweet) => {
     swimTweet.push(tweet.full_text);
