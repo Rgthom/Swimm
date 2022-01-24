@@ -1,20 +1,10 @@
 const Twit = require("twit");
 const config = require("./config");
+const params = require("./params");
 
 var T = new Twit(config);
 
 console.log("Starting the twitter search...");
-
-let params = {
-  screen_name: "SerpsSwimClub",
-  count: 10,
-  exclude_replies: true,
-  include_rts: false,
-  tweet_mode: "extended",
-};
-// T.get('search/tweets', params, gotData);
-
-
 
 T.get("statuses/user_timeline", params, gotData);
 
@@ -28,11 +18,6 @@ function gotData(err, data, response) {
   console.log(swimTweet);
 }
 
+console.log("Closing the twitter search...");
 
-
-console.log("Closing the twitter search...")
-
-
-
-
-
+console.log("some testing");
