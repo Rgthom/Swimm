@@ -39,7 +39,10 @@ async function displayTweets() {
     const data = await getTweets();
     tweets = data;
     console.log("we got the tweets");
-    console.log(tweets[0].full_text);
+    //console.log(tweets[0].full_text);
+    data.forEach((tweet) => {
+      console.log(tweet.full_text);
+    });
   } catch (error) {
     console.log(error);
   }
