@@ -1,0 +1,7 @@
+{
+  // Version of the setting file.  Always 0.2
+  "version": "0.2",
+  "language": "en",
+  // Ignore config.js because it only contains tokens
+  "ignorePaths": ["twitter-bot/config.js"]
+}

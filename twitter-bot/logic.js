@@ -1,54 +1,57 @@
 const Twit = require("twit");
 const config = require("./config");
-//const pools = require("./pools");
+const handles = require("./handles");
 
-var T = new Twit(config);
+const T = new Twit(config);
 
-(pools = {
-  screen_name: "SerpsSwimClub",
-  count: 2,
-  exclude_replies: true,
-  include_rts: false,
-  tweet_mode: "extended",
-}),
-  console.log("Starting the twitter search...");
+console.log("Starting the twitter search...");
 
-const swimTweet = [];
+// const swimTweet = [];
 //T.get("statuses/user_timeline", params, gotData);
 
-function getTweets() {
-  return new Promise((resolve, reject) => {
-    let pools = {
-      screen_name: "SerpsSwimClub",
-      count: 2,
-      exclude_replies: true,
-      include_rts: false,
-      tweet_mode: "extended",
-    };
-    T.get("statuses/user_timeline", pools, (err, data) => {
-      if (err) {
-        return reject(err);
-      }
-      return resolve(data);
+/**
+ * Retrieves tweets from the specified Twitter handle
+ *
+ * @param {string} handle A single Twitter handle
+ * @returns {Twit.Response} An array containing the tweets from the
+ * specified handle
+ */
+async function getTweets(handle) {
+  const params = {
+    screen_name: handle,
+    count: 2,
+    exclude_replies: true,
+    include_rts: false,
+    tweet_mode: "extended",
+  };
+
+  const request = await T.get("statuses/user_timeline", params);
+  const handleTweets = request.data;
+
+  return handleTweets;
+}
+
+/**
+ * Logs the tweets from every Twitter handle in handles.js
+ */
+async function displayTweets() {
+  // Run all requests in parallell
+  const promises = handles.map(getTweets);
+  const tweetsByHandle = await Promise.all(promises);
+
+  console.log("We got the tweets");
+
+  // Log all tweets prefixed by the handle each came from
+  tweetsByHandle.forEach((handleTweets, i) => {
+    handleTweets.forEach((tweet) => {
+      console.log(`\x1b[30m\x1b[42m@${handles[i]}:\x1b[0m ${tweet.full_text}`);
     });
   });
 }
 
-async function displayTweets() {
-  try {
-    const data = await getTweets();
-    tweets = data;
-    console.log("we got the tweets");
-    //console.log(tweets[0].full_text);
-    data.forEach((tweet) => {
-      console.log(tweet.full_text);
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
+displayTweets().catch(console.log);
 
-displayTweets();
+console.log("Closing the twitter search...");
 
 /*
 
@@ -77,5 +80,3 @@ function gotData(err, data, response) {
 }
 
 */
-
-console.log("Closing the twitter search...");
